@@ -147,14 +147,14 @@ app.post("/movies", async (request,response)=>{
     console.log(userFromDB);
     
     if(userFromDB){
-        response.send({message: "email already exists"});
-      
+        // response.send({message: "email already exists"});
+        response.status(400).send({message: "username already exists"});
         return;
     }
     
     if(password.length < 8){
-        response.send({message: "password must be longer"});
-       
+        // response.send({message: "password must be longer"});
+        response.status(400).send({message: "password must be longer"});
         return;
     }
         const hashedPassword = await genPassword(password); 
@@ -184,8 +184,8 @@ app.post("/movies", async (request,response)=>{
             
             response.send({message: "sucessful login"});
         }else{
-            response.send({message: "Invalid Credentials"});
-      
+            // response.send({message: "Invalid Credentials"});
+            response.status(401).send({message: "Invalid Credentials"});
         }
     
         
